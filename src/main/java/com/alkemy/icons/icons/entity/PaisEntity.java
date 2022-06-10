@@ -5,7 +5,6 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "pais")
@@ -29,7 +28,7 @@ public class PaisEntity {
     @JoinColumn(name = "continente_id", insertable = false, updatable = false)
     private ContinenteEntity continente;
 
-    @Column(name = "continente_id", nullable = false)
+    @Column(name = "continente_id", nullable = true)
     private Long continenteId;
 
     @ManyToMany(

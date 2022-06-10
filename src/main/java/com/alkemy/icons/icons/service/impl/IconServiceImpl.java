@@ -19,6 +19,11 @@ public class IconServiceImpl implements IconService {
     @Autowired
     private IconRepository iconRepository;
 
+    @Override
+    public IconDTO getDetailsById(Long id) {
+        return null;
+    }
+
     public IconDTO save(IconDTO dto) {
         IconEntity entity = iconMapper.iconDTO2Entity(dto);
         IconEntity entitySaved = iconRepository.save(entity);
@@ -26,9 +31,14 @@ public class IconServiceImpl implements IconService {
         return result;
     }
 
-    public List<IconDTO> getAllIconos() {
+    @Override
+    public List<IconDTO> getByFilters(String name, String date, List<Long> cities, String order) {
+        return null;
+    }
+
+    public List<IconDTO> getAll() {
         List<IconEntity> entities = iconRepository.findAll();
-        List<IconDTO> result = iconMapper.iconEntityList2DTOList(entities);
+        List<IconDTO> result = iconMapper.iconEntityList2DTOList(entities, false);
         return result;
     }
 
@@ -40,7 +50,23 @@ public class IconServiceImpl implements IconService {
         iconRepository.getReferenceById(id).setFechaCreacion(entity.getFechaCreacion());
         iconRepository.getReferenceById(id).setAltura(entity.getAltura());
         iconRepository.getReferenceById(id).setHistoria(entity.getHistoria());
+        iconRepository.save(iconRepository.getReferenceById(id));
         IconDTO result = iconMapper.iconEntity2DTO(iconRepository.getReferenceById(id));
         return result;
+    }
+
+    @Override
+    public void addPais(Long id, Long idPais) {
+
+    }
+
+    @Override
+    public void remvovePais(Long id, Long idPais) {
+
+    }
+
+    @Override
+    public void delete(Long id) {
+        iconRepository.deleteById(id);
     }
 }

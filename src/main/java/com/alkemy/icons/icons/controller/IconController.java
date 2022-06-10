@@ -24,7 +24,7 @@ public class IconController {
 
     @GetMapping
     public ResponseEntity<List<IconDTO>> getAll() {
-        List<IconDTO> iconos = iconService.getAllIconos();
+        List<IconDTO> iconos = iconService.getAll();
         return ResponseEntity.ok().body(iconos);
     }
 
@@ -32,5 +32,11 @@ public class IconController {
     public ResponseEntity<IconDTO> update(@PathVariable Long id, @RequestBody IconDTO icon) {
         IconDTO result = iconService.update(id, icon);
         return ResponseEntity.ok().body(result);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        iconService.delete(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
