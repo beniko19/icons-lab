@@ -20,8 +20,9 @@ public class PaisServiceImpl implements PaisService {
     private PaisRepository paisRepository;
 
     public PaisDTO save(PaisDTO dto) {
-        PaisEntity entity = paisMapper.paisDTO2Entity(dto);
+        PaisEntity entity = paisMapper.paisDTO2Entity(dto, true);
         PaisEntity entitySaved = paisRepository.save(entity);
+
         PaisDTO result = paisMapper.paisEntity2DTO(entitySaved);
         return result;
     }

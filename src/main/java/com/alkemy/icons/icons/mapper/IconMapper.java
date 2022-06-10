@@ -43,6 +43,12 @@ public class IconMapper {
         return dtos;
     }
 
+    public List<IconEntity> iconDTOList2EntityList(List<IconDTO> entities, boolean loadPaises) {
+        List<IconEntity> iconEntities = new ArrayList<>();
+        entities.stream().forEach(entity -> iconEntities.add(iconDTO2Entity(entity)));
+        return iconEntities;
+    }
+
     public IconDTO iconEntity2DTO(IconEntity entity, boolean loadPaises) {
         IconDTO dto = new IconDTO();
         dto.setId(entity.getId());

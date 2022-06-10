@@ -2,6 +2,7 @@ package com.alkemy.icons.icons.mapper;
 
 import com.alkemy.icons.icons.dto.IconDTO;
 import com.alkemy.icons.icons.dto.PaisDTO;
+import com.alkemy.icons.icons.entity.IconEntity;
 import com.alkemy.icons.icons.entity.PaisEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,12 +16,18 @@ public class PaisMapper {
     @Autowired
     IconMapper iconMapper;
 
-    public PaisEntity paisDTO2Entity(PaisDTO dto) {
+    public PaisEntity paisDTO2Entity(PaisDTO dto, boolean loadIcons) {
         PaisEntity paisEntity = new PaisEntity();
         paisEntity.setImagen(dto.getImagen());
         paisEntity.setDenominacion(dto.getDenominacion());
         paisEntity.setCantidadHabitantes(dto.getCantidadHabitantes());
         paisEntity.setSuperficie(dto.getSuperficie());
+        paisEntity.setContinenteId(dto.getContinenteId());
+        System.out.println("AAAAAAAAAAAAA "+dto.getIcons());
+        if (loadIcons) {
+            List<IconEntity> icons = iconMapper.iconDTOList2EntityList(dto.getIcons(), loadIcons);
+            paisEntity.setIcons(icons);
+        }
         return paisEntity;
     }
 
@@ -31,6 +38,7 @@ public class PaisMapper {
         dto.setDenominacion(entity.getDenominacion());
         dto.setCantidadHabitantes(entity.getCantidadHabitantes());
         dto.setSuperficie(entity.getSuperficie());
+        dto.setContinenteId(entity.getContinenteId());
         return dto;
     }
 
@@ -41,6 +49,7 @@ public class PaisMapper {
         dto.setDenominacion(entity.getDenominacion());
         dto.setCantidadHabitantes(entity.getCantidadHabitantes());
         dto.setSuperficie(entity.getSuperficie());
+        dto.setContinenteId(entity.getContinenteId());
         if (loadIcons) {
             List<IconDTO> iconDTOS = iconMapper.iconEntityList2DTOList(entity.getIcons(), false);
             dto.setIcons(iconDTOS);

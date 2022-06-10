@@ -28,8 +28,8 @@ public class PaisEntity {
     @JoinColumn(name = "continente_id", insertable = false, updatable = false)
     private ContinenteEntity continente;
 
-    @Column(name = "continente_id", nullable = true)
-    private Long continenteId;
+    @Column(name = "continente_id", nullable = false)
+    private Integer continenteId;
 
     @ManyToMany(
             cascade = {
